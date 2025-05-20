@@ -1,79 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Price Difference Calculator</title>
+    <title>Simple Price Difference Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .calculator {
-            border: 1px solid #ddd;
-            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background-color: #e0e0e0;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         input {
-            padding: 8px;
-            margin: 5px 0;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
+            width: 100px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
+            text-align: right;
         }
         .result {
-            margin-top: 20px;
+            min-width: 120px;
             padding: 10px;
-            background-color: #f8f8f8;
+            background-color: white;
             border-radius: 4px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <h1>Price Difference Calculator</h1>
-        <label for="price1">First Price:</label>
-        <input type="number" id="price1" placeholder="Enter first price">
-        
-        <label for="price2">Second Price:</label>
-        <input type="number" id="price2" placeholder="Enter second price">
-        
-        <button onclick="calculateDifference()">Calculate Difference</button>
-        
-        <div class="result" id="result">
-            The price difference will appear here
-        </div>
+        <input type="number" id="price1" placeholder="Price 1" oninput="calculateDifference()">
+        <input type="number" id="price2" placeholder="Price 2" oninput="calculateDifference()">
+        <div class="result" id="result">0.00</div>
     </div>
 
     <script>
         function calculateDifference() {
-            const price1 = parseFloat(document.getElementById('price1').value);
-            const price2 = parseFloat(document.getElementById('price2').value);
+            const price1 = parseFloat(document.getElementById('price1').value) || 0;
+            const price2 = parseFloat(document.getElementById('price2').value) || 0;
             
-            if (isNaN(price1) || isNaN(price2)) {
-                document.getElementById('result').innerHTML = "Please enter valid prices";
-                return;
-            }
-            
-            const difference = Math.abs(price1 - price2);
-            const percentageDiff = (difference / Math.min(price1, price2)) * 100;
-            
-            document.getElementById('result').innerHTML = `
-                <strong>Absolute Difference:</strong> ${difference.toFixed(2)}<br>
-                <strong>Percentage Difference:</strong> ${percentageDiff.toFixed(2)}%
-            `;
+            const difference = (price1 - price2).toFixed(2);
+            document.getElementById('result').textContent = difference;
         }
     </script>
 </body>
