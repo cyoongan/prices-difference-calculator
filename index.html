@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Price Difference Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .calculator {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Price Difference Calculator</h1>
+        <label for="price1">First Price:</label>
+        <input type="number" id="price1" placeholder="Enter first price">
+        
+        <label for="price2">Second Price:</label>
+        <input type="number" id="price2" placeholder="Enter second price">
+        
+        <button onclick="calculateDifference()">Calculate Difference</button>
+        
+        <div class="result" id="result">
+            The price difference will appear here
+        </div>
+    </div>
+
+    <script>
+        function calculateDifference() {
+            const price1 = parseFloat(document.getElementById('price1').value);
+            const price2 = parseFloat(document.getElementById('price2').value);
+            
+            if (isNaN(price1) || isNaN(price2)) {
+                document.getElementById('result').innerHTML = "Please enter valid prices";
+                return;
+            }
+            
+            const difference = Math.abs(price1 - price2);
+            const percentageDiff = (difference / Math.min(price1, price2)) * 100;
+            
+            document.getElementById('result').innerHTML = `
+                <strong>Absolute Difference:</strong> ${difference.toFixed(2)}<br>
+                <strong>Percentage Difference:</strong> ${percentageDiff.toFixed(2)}%
+            `;
+        }
+    </script>
+</body>
+</html>
